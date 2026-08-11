@@ -1,0 +1,10 @@
+^C:\USERS\АДМИНИСТРАТОР\DOCUMENTS\OTUS\OTUS-CPP-BASICS\02_HOMEWORK\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/Администратор/Documents/OTUS/otus-cpp-basics/02_homework -BC:/Users/Администратор/Documents/OTUS/otus-cpp-basics/02_homework/build --check-stamp-file C:/Users/Администратор/Documents/OTUS/otus-cpp-basics/02_homework/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
