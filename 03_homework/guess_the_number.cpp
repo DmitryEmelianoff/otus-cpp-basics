@@ -1,10 +1,17 @@
+#include "argument.h"
 #include "check_value.h"
 
 #include <iostream>
 #include <fstream>
 #include <string>
 
-int main() {
+int main(int argc, char** argv) {
+
+	const int max_value = argument(argc, argv);
+
+	if(max_value < 0) {
+		return -1;
+	}
 
 	const std::string high_scores_filename = "high_scores.txt";
 
@@ -13,7 +20,7 @@ int main() {
 	std::string user_name;
 	std::cin >> user_name;
 
-	int attempts_count = check_value();
+	int attempts_count = check_value(max_value);
 
 	// Write new high score to the records table
 	{

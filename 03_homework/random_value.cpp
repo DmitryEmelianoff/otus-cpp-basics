@@ -5,13 +5,11 @@
 #include <cstdlib>
 #include <ctime>
 
-int random_value() {
+int random_value(const int& max_value) {
 
-	const int max_value = 100;
+	std::srand(unsigned int(std::time(nullptr))); // use current time as seed for random generator
 
-	std::srand(std::time(nullptr)); // use current time as seed for random generator
-
-	const int random_value = std::rand() % max_value;
+	const int random_value = std::rand() % (max_value + 1);
 
 	return random_value;
 }

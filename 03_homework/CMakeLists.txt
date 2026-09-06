@@ -9,4 +9,7 @@ add_executable(
 	check_value.cpp
 	random_value.h
 	random_value.cpp
+	argument.h
+	argument.cpp
 )
+

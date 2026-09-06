@@ -4,10 +4,10 @@
 
 #include <iostream>
 
-int check_value() {
+int check_value(const int& max_value) {
 
 	int number_of_attempts = 0;
-	const int target_value = random_value();
+	const int target_value = random_value(max_value);
 	int current_value = 0;
 
 	std::cout << "Enter your guess:" << std::endl;
