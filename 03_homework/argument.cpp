@@ -3,7 +3,7 @@
 #include <iostream>
 #include <string>
 
-int argument(const int& argc, char**& argv) {
+int argument(const int argc, char** argv) {
 
 	const int max_value = 100;
 

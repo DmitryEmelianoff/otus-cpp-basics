@@ -5,7 +5,7 @@
 #include <cstdlib>
 #include <ctime>
 
-int random_value(const int& max_value) {
+int random_value(const int max_value) {
 
 	std::srand(unsigned int(std::time(nullptr))); // use current time as seed for random generator
 
