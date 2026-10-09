@@ -67,6 +67,10 @@ void Physics::move(std::vector<Ball>& balls) const {
 
 void Physics::processCollision(Ball& a, Ball& b,
                                double distanceBetweenCenters2) const {
+    // если хотя бы один из шаров "не материален" - выйти из функции
+    if(!a.ballIsCollidable() || !b.ballIsCollidable()) {
+        return;
+    }
     // нормированный вектор столкновения
     const Point normal =
         (b.getCenter() - a.getCenter()) / std::sqrt(distanceBetweenCenters2);

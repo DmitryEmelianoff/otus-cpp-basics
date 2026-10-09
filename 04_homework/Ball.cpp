@@ -2,8 +2,8 @@
 #include "Ball.hpp"
 #include <cmath>
 
-    Ball::Ball(const Point& ce, const Velocity& v, const Color& co, double r)
-    : center{ce}, velocity{v}, color{co}, radius{r} {}
+    Ball::Ball(const Point& ce, const Velocity& v, const Color& co, double r, bool iscol)
+    : center{ce}, velocity{v}, color{co}, radius{r}, isCollidable(iscol) {}
 
 
 /**
@@ -61,6 +61,15 @@ Point Ball::getCenter() const {
 double Ball::getRadius() const {
     // TODO: место для доработки
     return radius;
+}
+
+/**
+ * @brief Возвращает значение параметра, отвечающего за то, будет ли сталкиваться шар с другими шарами
+ * @details если true - шар будет участвовать в столкновениях.
+ * если false - шар будет пролетать другие шары насквозь.
+ */
+bool Ball::ballIsCollidable() const {
+    return isCollidable;
 }
 
 /**
