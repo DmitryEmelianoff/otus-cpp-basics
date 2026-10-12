@@ -2,8 +2,6 @@
 
 int main() {
 
-    // Последовательный контейнер
-    
     // 1. создание объекта контейнера для хранения объектов типа int
     MySequentialContainer<int> values1;
     MyListTypeContainer<int> values2;
