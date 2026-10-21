@@ -7,13 +7,13 @@ class MySequentialContainer {
 
     public:
 
-        inline MySequentialContainer() {}
-        inline ~MySequentialContainer() {
+        MySequentialContainer() {}
+        ~MySequentialContainer() {
             delete [] m_region; // удаление последней созданной области
         }
 
         // добавление элемента в конец контейнера
-        inline void push_back(T value) {
+        void push_back(T value) {
             T* new_region = new T[m_size + 1]; // новая область памяти
             for (size_t i = 0; i < m_size; ++i) {
                 new_region[i] = m_region[i]; // копирование элементов
@@ -25,7 +25,7 @@ class MySequentialContainer {
         }
         
         // вставка элемента в произвольную позицию
-        inline void insert(T value, int index) {
+        void insert(T value, int index) {
             if (index < 0 || index > m_size) { // замена несуществующей позиции на минимальную или максимальную
                 if(index < 0) {
                     index = 0;
@@ -48,17 +48,12 @@ class MySequentialContainer {
         };
 
         // удаление элемента из произвольной позиции
-        inline void erase(size_t index) {
+        void erase(size_t index) {
             if (m_size == 0) { // если контейнер пустой - ничего не делать.
                 return;
             }
-            if (index < 0 || index > m_size - 1) { // замена несуществующей позиции на минимальную или максимальную
-                if (index < 0) {
-                    index = 0;
-                }
-                else {
-                    index = m_size - 1;
-                }
+            if (index >= m_size) { // замена несуществующей позиции на максимальную
+                index = m_size - 1;
             }
             T* new_region = new T[m_size - 1]; // новая область памяти
             for (size_t i = 0; i < index; ++i) {
@@ -73,12 +68,12 @@ class MySequentialContainer {
         };
 
         // вывод количества элементов контейнера
-        inline size_t size() const {
+        size_t size() const {
             return m_size;
         };
 
         // возврат доступа к определенному элементу
-        inline T& operator[](int index) {
+        T& operator[](int index) {
             return m_region[index];
         };
 
@@ -115,8 +110,8 @@ class MyListTypeContainer {
 
     public:
 
-        inline MyListTypeContainer() {}
-        inline ~MyListTypeContainer() {
+        MyListTypeContainer() {}
+        ~MyListTypeContainer() {
             if (m_last != nullptr) {
                 while (m_last -> prev != nullptr) {
                     m_last = m_last -> prev;
@@ -127,7 +122,7 @@ class MyListTypeContainer {
         }
 
         // добавление элемента в конец контейнера
-        inline void push_back(T value) {
+        void push_back(T value) {
             Node<T>* new_node = new Node<T>{}; // создание нового узла
             new_node -> prev = m_last; // предыдущим узлом станет последний
             new_node -> next = nullptr; // следующего узла пока нет
@@ -140,7 +135,7 @@ class MyListTypeContainer {
         }
         
         // вставка элемента в произвольную позицию
-        inline void insert(T value, int index) {
+        void insert(T value, int index) {
             if (index < 0 || index > m_size) { // замена несуществующей позиции на минимальную или максимальную
                 if(index < 0) {
                     index = 0;
@@ -171,17 +166,12 @@ class MyListTypeContainer {
         };
 
         // удаление элемента из произвольной позиции
-        inline void erase(size_t index) {
+        void erase(size_t index) {
             if (m_size == 0) { // если контейнер пустой - ничего не делать.
                 return;
             }
-            if (index < 0 || index > m_size - 1) { // замена несуществующей позиции на минимальную или максимальную
-                if(index < 0) {
-                    index = 0;
-                }
-                else {
-                    index = m_size - 1;
-                }
+            if (index >= m_size) { // замена несуществующей позиции на максимальную
+                index = m_size - 1;
             }
             Node<T>* m_current = m_last;
             if (m_size > 1) {
@@ -210,12 +200,12 @@ class MyListTypeContainer {
         };
 
         // вывод количества элементов контейнера
-        inline size_t size() const {
+        size_t size() const {
             return m_size;
         };
 
         // возврат доступа к определенному элементу
-        inline T& operator[](int index) {
+        T& operator[](int index) {
             Node<T>* m_current = m_last;
             for (size_t i = 0; i != m_size - index - 1; ++i) {
                 m_current = m_current -> prev;
