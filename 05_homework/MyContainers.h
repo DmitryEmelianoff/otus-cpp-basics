@@ -25,14 +25,9 @@ class MySequentialContainer {
         }
         
         // вставка элемента в произвольную позицию
-        void insert(T value, int index) {
-            if (index < 0 || index > m_size) { // замена несуществующей позиции на минимальную или максимальную
-                if(index < 0) {
-                    index = 0;
-                }
-                else {
-                    index = m_size;
-                }
+        void insert(T value, size_t index) {
+            if (index > m_size) { // замена несуществующей позиции на максимальную
+                index = m_size;
             }
             T* new_region = new T[m_size + 1]; // новая область памяти
             for (size_t i = 0; i < index; ++i) {
@@ -135,14 +130,9 @@ class MyListTypeContainer {
         }
         
         // вставка элемента в произвольную позицию
-        void insert(T value, int index) {
-            if (index < 0 || index > m_size) { // замена несуществующей позиции на минимальную или максимальную
-                if(index < 0) {
-                    index = 0;
-                }
-                else {
-                    index = m_size;
-                }
+        void insert(T value, size_t index) {
+            if (index > m_size) { // замена несуществующей позиции на максимальную
+                index = m_size;
             }
             if (index == m_size) {
                 push_back(value); // если целевой индекс последний - добавление элемента в конец контейнера
