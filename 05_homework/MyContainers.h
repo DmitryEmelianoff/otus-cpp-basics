@@ -68,7 +68,7 @@ class MySequentialContainer {
         };
 
         // возврат доступа к определенному элементу
-        T& operator[](int index) {
+        T& operator[](size_t index) {
             return m_region[index];
         };
 
@@ -195,7 +195,7 @@ class MyListTypeContainer {
         };
 
         // возврат доступа к определенному элементу
-        T& operator[](int index) {
+        T& operator[](size_t index) {
             Node<T>* m_current = m_last;
             for (size_t i = 0; i != m_size - index - 1; ++i) {
                 m_current = m_current -> prev;
