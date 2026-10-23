@@ -44,22 +44,21 @@ class MySequentialContainer {
 
         // удаление элемента из произвольной позиции
         void erase(size_t index) {
-            if (m_size == 0) { // если контейнер пустой - ничего не делать.
-                return;
+            if (m_size > 0) { // проводить удаление только если контейнер не пустой.
+                if (index >= m_size) { // замена несуществующей позиции на максимальную
+                    index = m_size - 1;
+                }
+                T* new_region = new T[m_size - 1]; // новая область памяти
+                for (size_t i = 0; i < index; ++i) {
+                    new_region[i] = m_region[i]; // копирование элементов перед ненужным элементом
+                }
+                for (size_t i = index; i < m_size - 1; ++i) {
+                    new_region[i] = m_region[i + 1]; // копирование элементов после ненужного элемента
+                }
+                delete [] m_region; // удаление старой области
+                m_region = new_region; // сохранение новой в мембер
+                --m_size; // обновление информации о размере
             }
-            if (index >= m_size) { // замена несуществующей позиции на максимальную
-                index = m_size - 1;
-            }
-            T* new_region = new T[m_size - 1]; // новая область памяти
-            for (size_t i = 0; i < index; ++i) {
-                new_region[i] = m_region[i]; // копирование элементов перед ненужным элементом
-            }
-            for (size_t i = index; i < m_size - 1; ++i) {
-                new_region[i] = m_region[i + 1]; // копирование элементов после ненужного элемента
-            }
-            delete [] m_region; // удаление старой области
-            m_region = new_region; // сохранение новой в мембер
-            --m_size; // обновление информации о размере
         };
 
         // вывод количества элементов контейнера
@@ -157,36 +156,35 @@ class MyListTypeContainer {
 
         // удаление элемента из произвольной позиции
         void erase(size_t index) {
-            if (m_size == 0) { // если контейнер пустой - ничего не делать.
-                return;
-            }
-            if (index >= m_size) { // замена несуществующей позиции на максимальную
-                index = m_size - 1;
-            }
-            Node<T>* m_current = m_last;
-            if (m_size > 1) {
-                for (size_t i = 0; i != m_size - index - 1; ++i) {
-                    m_current = m_current -> prev;
+            if (m_size > 0) { // проводить удаление только если контейнер не пустой.
+                if (index >= m_size) { // замена несуществующей позиции на максимальную
+                    index = m_size - 1;
                 }
-                if (index > 0 && index < m_size - 1) {
-                    m_current -> prev -> next = m_current -> next;
-                    m_current -> next -> prev = m_current -> prev;
-                }
-                else {
-                    if (index == 0) {
-                        m_current -> next -> prev = nullptr;
+                Node<T>* m_current = m_last;
+                if (m_size > 1) {
+                    for (size_t i = 0; i != m_size - index - 1; ++i) {
+                        m_current = m_current -> prev;
+                    }
+                    if (index > 0 && index < m_size - 1) {
+                        m_current -> prev -> next = m_current -> next;
+                        m_current -> next -> prev = m_current -> prev;
                     }
                     else {
-                        m_last = m_current -> prev;
-                        m_last -> next = nullptr;
+                        if (index == 0) {
+                            m_current -> next -> prev = nullptr;
+                        }
+                        else {
+                            m_last = m_current -> prev;
+                            m_last -> next = nullptr;
+                        }
                     }
                 }
+                else {
+                    m_last = nullptr;
+                }
+                delete m_current;
+                --m_size;
             }
-            else {
-                m_last = nullptr;
-            }
-            delete m_current;
-            --m_size;
         };
 
         // вывод количества элементов контейнера
