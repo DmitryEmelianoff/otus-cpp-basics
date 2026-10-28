@@ -1,3 +1,4 @@
+// добавление файла .h с контейнерами
 #include "MyContainers.h"
 
 int main() {
